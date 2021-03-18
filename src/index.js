@@ -98,7 +98,6 @@ const onListEvent = async date => {
 
 const haveCalendar = async () => {
   const data = await onListCalendar(true);
-  // return data.map(x => (x.title)).includes("Create Obat Kalbe")
   let calendarId = data
     .filter(x => x.title === 'Create Obat Kalbe')
     .map(x => x.id)
@@ -127,7 +126,6 @@ const haveCalendar = async () => {
 };
 
 const onAddEvent = async () => {
-  // const date = new Date();
   let calendarId = await haveCalendar();
 
   const createEvent = async date => {
@@ -294,7 +292,7 @@ const Calendar = () => {
               ? listEvent.map((data, index) => (
                   <View style={styles.item} key={`i${index}`}>
                     <Text style={styles.title} key={`t${index}`}>
-                      {data.title}
+                      Title : {data.title}
                     </Text>
                     <Text style={styles.title} key={`d${index}`}>
                       {new Date(data.startDate).toString()}
