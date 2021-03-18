@@ -1,3 +1,6 @@
-export const standarLog = (title, data, type = 'standar') => {
-  console.log(`${title} => `, data ? data : '');
+export const log = (title, data, type = 'standar') => {
+  const blackList = []
+  if(!blackList.includes(type)){
+    console.log(`${title} => `, data ? data : '');
+  }
 };
