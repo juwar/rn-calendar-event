@@ -66,8 +66,8 @@ const onListCalendar = async (result = false) => {
       return (calendars = res);
     });
   }
-  log('Total List => ', calendars.length);
-  log('Calendars => ', calendars);
+  // log('Total List => ', calendars.length);
+  // log('Calendars => ', calendars);
   if (result) {
     return calendars;
   }
@@ -127,8 +127,11 @@ const haveCalendar = async () => {
 
 const onAddEvent = async () => {
   let calendarId = await haveCalendar();
+  let day = 86400000 * 3;
 
   const createEvent = async date => {
+    const originalDate = date
+    date = new Date(date)
     const title = `Test ${date.toDateString()}`;
     const note = `Note ${date.toString()}`;
     await RNCalendarEvents.saveEvent(title, {
@@ -142,7 +145,7 @@ const onAddEvent = async () => {
         frequency: 'daily',
         occurrence: 0,
         interval: 0,
-        endDate: '2021-03-20T06:59:00.000Z',
+        endDate: new Date(originalDate + day).toISOString(),
       },
       notes: note,
       alarms: [
@@ -157,7 +160,7 @@ const onAddEvent = async () => {
   };
   if ((await cekPermissionCalendar()) && calendarId) {
     listTimeEvent.map(item => {
-      createEvent(new Date(item.date));
+      createEvent(item.date);
     });
   }
 };
@@ -238,7 +241,7 @@ const Calendar = () => {
 
   useEffect(async () => {
     await updateListEvent(true);
-    // await listEventToday();
+    // await onDeleteEvent()
   }, []);
 
   useEffect(async () => {

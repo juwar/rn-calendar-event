@@ -5,6 +5,11 @@ platform :ios, '10.0'
 
 target 'RNCcalendarEvent' do
   config = use_native_modules!
+  # add the Firebase pod for Google Analytics
+  pod 'Firebase/Analytics'
+  # add pods for any other desired Firebase products
+  # https://firebase.google.com/docs/ios/setup#available-pods
+
 
   use_react_native!(
     :path => config[:reactNativePath],
